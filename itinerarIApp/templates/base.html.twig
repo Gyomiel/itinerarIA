@@ -1,19 +1,95 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %} itinerarIA | Home
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+			<link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+		{% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+			{{ importmap() }}
+		{% endblock %}
+	</head>
+	<body class="flex flex-col min-h-screen">
+		{% block header %}
+
+				<nav class="bg-[#8F99FB] border-gray-200">
+					<div class="bg-[#8F99FB] flex items-center justify-between p-6">
+						<a href="{{ path('home') }}" class="ml-4 flex items-center space-x-3 rtl:space-x-reverse">
+							<img src="{{ asset('imgs/newSewaiLogo.png') }}" class="h-10"/>
+						</a>
+						<div class="bg-[#8F99FB] flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+							<button type="button" class="mr-4 text-white bg-black hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-[30px] text-lg px-4 py-2 text-center" onclick="window.location.href='#'">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25"/>
+								</svg>
+							</button>
+						</div>
+						<div class="mr-6 bg-[#8F99FB] items-center justify-between hidden w-full md:flex md:w-auto md:order-1 ml-auto" id="navbar-cta">
+							<ul class="bg-[#8F99FB] flex flex-col justify-center items-center font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+								<li class="bg-[#8F99FB] flex items-center">
+									<a href="#" class="bg-[#8F99FB] block pt-2 px-3 text-white hover:text-black">About</a>
+								</li>
+								<li class="bg-[#8F99FB] flex items-center">
+									<a href="#" class="bg-[#8F99FB] block pt-2 px-3 text-white hover:text-black">Journeys</a>
+								</li>
+								<li class="bg-[#8F99FB] flex items-center">
+									<a href="#" class="bg-[#8F99FB] block pt-2 px-3 text-white hover:text-black">Team</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+
+		{% endblock %}
+		
+
+{% block footer %}
+	<footer class="w-full bg-[#4F558A] shadow col-span-2">
+		<div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+			<span class="text-sm text-slate-100">© 2024
+				<span class="font-bold">sewai</span>
+				by
+				<a href="https://github.com/Gyomiel" class="font-bold hover:underline">Gyomiel</a>. All Rights Reserved.
+			</span>
+			<ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-slate-300 sm:mt-0">
+				<li>
+					<a href="#" class="hover:underline me-4 md:me-6">About</a>
+				</li>
+				<li>
+					<a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+				</li>
+				<li>
+					<a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+				</li>
+				<li>
+					<a href="#" class="hover:underline">Contact</a>
+				</li>
+			</ul>
+		</div>
+	</footer>
+
+	<style>
+		.bgImg {
+			background-image: url('/imgs/fujiOpacity.png');
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		.backdrop {
+			backdrop-filter: blur(2px);
+		}
+	</style>
+
+{% endblock %}
+
+
+	</body>
+</html></body></html>
+
