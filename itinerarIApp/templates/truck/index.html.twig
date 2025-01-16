@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Truck index{% endblock %}
+
+{% block body %}
+    <h1>Truck index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Availability</th>
+                <th>Max_mass</th>
+                <th>Max_volume</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for truck in trucks %}
+            <tr>
+                <td>{{ truck.id }}</td>
+                <td>{{ truck.availability }}</td>
+                <td>{{ truck.maxMass }}</td>
+                <td>{{ truck.maxVolume }}</td>
+                <td>
+                    <a href="{{ path('app_truck_show', {'id': truck.id}) }}">show</a>
+                    <a href="{{ path('app_truck_edit', {'id': truck.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_truck_new') }}">Create new</a>
+{% endblock %}
