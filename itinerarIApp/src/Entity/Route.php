@@ -23,6 +23,7 @@ class Route
     private Collection $orderId;
 
     #[ORM\ManyToOne(inversedBy: 'routes')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Truck $truck = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

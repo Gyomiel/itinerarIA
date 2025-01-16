@@ -22,9 +22,6 @@ class Driver
     #[ORM\Column]
     private ?int $phone = null;
 
-    #[ORM\OneToOne(mappedBy: 'driver', cascade: ['persist', 'remove'])]
-    private ?Truck $truck = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -62,28 +59,6 @@ class Driver
     public function setPhone(int $phone): static
     {
         $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getTruck(): ?Truck
-    {
-        return $this->truck;
-    }
-
-    public function setTruck(?Truck $truck): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($truck === null && $this->truck !== null) {
-            $this->truck->setDriver(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($truck !== null && $truck->getDriver() !== $this) {
-            $truck->setDriver($this);
-        }
-
-        $this->truck = $truck;
 
         return $this;
     }

@@ -15,7 +15,7 @@ class Order
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'orders')]
+    #[ORM\ManyToOne(inversedBy: 'orderId')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Customer $customer = null;
 
@@ -41,6 +41,7 @@ class Order
     private ?string $maximum_permissible_volume = null;
 
     #[ORM\ManyToOne(inversedBy: 'orderId')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Route $route = null;
 
     public function getId(): ?int

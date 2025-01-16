@@ -15,7 +15,7 @@ class Truck
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'truck', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Driver $driver = null;
 
     #[ORM\Column(length: 255)]

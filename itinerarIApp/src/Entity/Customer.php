@@ -34,11 +34,11 @@ class Customer
      * @var Collection<int, Order>
      */
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'customer')]
-    private Collection $orders;
+    private Collection $orderId;
 
     public function __construct()
     {
-        $this->orders = new ArrayCollection();
+        $this->orderId = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,27 +109,27 @@ class Customer
     /**
      * @return Collection<int, Order>
      */
-    public function getOrders(): Collection
+    public function getOrderId(): Collection
     {
-        return $this->orders;
+        return $this->orderId;
     }
 
-    public function addOrder(Order $order): static
+    public function addOrderId(Order $orderId): static
     {
-        if (!$this->orders->contains($order)) {
-            $this->orders->add($order);
-            $order->setCustomer($this);
+        if (!$this->orderId->contains($orderId)) {
+            $this->orderId->add($orderId);
+            $orderId->setCustomer($this);
         }
 
         return $this;
     }
 
-    public function removeOrder(Order $order): static
+    public function removeOrderId(Order $orderId): static
     {
-        if ($this->orders->removeElement($order)) {
+        if ($this->orderId->removeElement($orderId)) {
             // set the owning side to null (unless already changed)
-            if ($order->getCustomer() === $this) {
-                $order->setCustomer(null);
+            if ($orderId->getCustomer() === $this) {
+                $orderId->setCustomer(null);
             }
         }
 
