@@ -25,10 +25,10 @@ class Order
     #[ORM\Column(length: 255)]
     private ?string $delivery_address = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 8)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 17, scale: 15)]
     private ?string $latitude = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 8)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 17, scale: 15)]
     private ?string $longitude = null;
 
     #[ORM\Column(length: 255)]
