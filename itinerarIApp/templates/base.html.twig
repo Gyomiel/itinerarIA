@@ -6,9 +6,13 @@
 			{% block title %} itinerarIA | Home
 			{% endblock %}
 		</title>
+
+		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 			<link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+
 		{% endblock %}
 
 		{% block javascripts %}
@@ -19,28 +23,28 @@
 	<body class="flex flex-col min-h-screen">
 		{% block header %}
 
-				<nav class="bg-[#52D3D8] border-gray-200">
-					<div class="bg-[#52D3D8] flex items-center justify-between p-6">
+				<nav class="bg-[#4DBAA8] border-gray-200">
+					<div class="bg-[#4DBAA8] flex items-center justify-between p-6">
 						<a href="{{ path('home') }}" class="ml-4 flex items-center space-x-3 rtl:space-x-reverse">
-							<img src="{{ asset('imgs/newSewaiLogo.png') }}" class="h-10"/>
+							<img src="{{ asset('imgs/itinerarIA2_2.jpg') }}" class="h-10"/>
 						</a>
-						<div class="bg-[#52D3D8] flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+						<div class="bg-[#4DBAA8] flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
 							<button type="button" class="mr-4 text-white bg-black hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-[30px] text-lg px-4 py-2 text-center" onclick="window.location.href='#'">
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
 									<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25"/>
 								</svg>
 							</button>
 						</div>
-						<div class="mr-6 bg-[#52D3D8] items-center justify-between hidden w-full md:flex md:w-auto md:order-1 ml-auto" id="navbar-cta">
-							<ul class="bg-[#52D3D8] flex flex-col justify-center items-center font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-								<li class="bg-[#52D3D8] flex items-center">
-									<a href="#" class="bg-[#52D3D8] block pt-2 px-3 text-white hover:text-black">Placeholder</a>
+						<div class="mr-6 bg-[#4DBAA8] items-center justify-between hidden w-full md:flex md:w-auto md:order-1 ml-auto" id="navbar-cta">
+							<ul class="bg-[#4DBAA8] flex flex-col justify-center items-center font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+								<li class="bg-[#4DBAA8] flex items-center">
+									<a href="#" class="bg-[#4DBAA8] block pt-2 px-3 text-white hover:text-black">Placeholder</a>
 								</li>
-								<li class="bg-[#52D3D8] flex items-center">
-									<a href="#" class="bg-[#52D3D8] block pt-2 px-3 text-white hover:text-black">Placeholder</a>
+								<li class="bg-[#4DBAA8] flex items-center">
+									<a href="#" class="bg-[#4DBAA8] block pt-2 px-3 text-white hover:text-black">Placeholder</a>
 								</li>
-								<li class="bg-[#52D3D8] flex items-center">
-									<a href="#" class="bg-[#52D3D8] block pt-2 px-3 text-white hover:text-black">Placeholder</a>
+								<li class="bg-[#4DBAA8] flex items-center">
+									<a href="#" class="bg-[#4DBAA8] block pt-2 px-3 text-white hover:text-black">Placeholder</a>
 								</li>
 							</ul>
 						</div>
@@ -51,15 +55,16 @@
 
 {% block body %}
 
+
 {% endblock %}
 		
 
 {% block footer %}
-	<footer class="w-full bg-[#200E3A] shadow">
+	<footer class="w-full bg-[#1C2541] shadow self-end">
 		<div class="w-full mx-auto max-w-screen-xl p-4 text-center">
 			<span class="text-sm text-slate-100">
 				© 2025
-				<span class="font-bold">itinerar<span class="text-[#52D3D8]">IA</span></span>
+				<span class="font-bold">itinerar<span class="text-[#7DE2D1]">IA</span></span>
 				by
 				<a href="https://github.com/zoraidafalcon" class="font-bold hover:underline">Ana Zoraida Falcón</a>,
 				<a href="https://github.com/AngelRodriguez66" class="font-bold hover:underline">Ángel Rodríguez</a>,

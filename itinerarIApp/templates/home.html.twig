@@ -5,10 +5,205 @@
 		{% block title %}itinerarIA | Home
 		{% endblock %}
 	</title>
+	
+	<head>
+		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+	</head>
 
 {% endblock %}
 
 {% block body %}
+	<div class="card__wrapper">
+		<div class="card">
+		<span class="card__title">Optimizing routes for a smarter, greener future.</span>
+			<p class="card__content"><span class="boldTxt">itinerarIA</span> is a logistics platform that uses an advanced AI model to optimize routes, ensuring trucks are fully loaded and take the shortest, most efficient paths. This leads to faster deliveries, better organization, and reduced fuel consumption, making the process more eco-friendly and cost-effective.</p>
+			<div class="buttonContainer">
+				<button class="card__button">
+					<a href="#" class="centerThis">Admin dashboard</a>
+				</button>
+				<button class="card__button2">
+					<a href="#" class="centerThis">Driver dashboard</a>
+				</button>
+			</div>
+		</div>
+	</div>
+
+<style>
+
+.card__wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.card {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+font-family: 'Raleway', sans-serif;
+  width: 1400px;
+  padding: 20px;
+  background: #FFFAFB;
+  border: 6px solid #000;
+  box-shadow: 12px 12px 0 #000;
+}
+
+.boldTxt {
+	font-weight: 800;
+}
+
+.card__title {
+  font-size: 38px;
+  font-weight: 900;
+  color: #000;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.card__title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 90%;
+  height: 3px;
+  background-color: #000;
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+.card__content {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #000;
+  margin-bottom: 45px;
+  text-align: center;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.buttonContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 25px;
+	margin-bottom: 20px;
+}
+
+.centerThis {
+	width: 100%;
+}
+
+.card__button {
+font-family: 'Raleway', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 3px solid #000;
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+  width: 250px;
+  height: 100%;
+}
+
+.card__button::before {
+  content: "Route optimization";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 105%;
+  background-color: #5ad641;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform 0.3s;
+}
+
+.card__button:hover::before {
+  transform: translateY(0);
+}
+
+.card__button2 {
+font-family: 'Raleway', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 3px solid #000;
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+  width: 250px;
+  height: 100%;
+}
+
+.card__button2::before {
+  content: "Delivery route";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 105%;
+  background-color: #5ad641;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform 0.3s;
+}
+
+.card__button2:hover::before {
+  transform: translateY(0);
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(2px, 2px);
+  }
+  25% {
+    transform: translate(-2px, -2px);
+  }
+  50% {
+    transform: translate(-2px, 2px);
+  }
+  75% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(2px, 2px);
+  }
+}
+
+.glitch {
+  animation: glitch 0.3s infinite;
+}
+
+</style>
+
 
 
 
