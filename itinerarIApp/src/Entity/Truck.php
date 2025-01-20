@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TruckRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TruckRepository::class)]
@@ -32,6 +33,12 @@ class Truck
      */
     #[ORM\OneToMany(targetEntity: Route::class, mappedBy: 'truck')]
     private Collection $routes;
+
+    #[ORM\Column(length: 255)]
+    private ?string $license_plate = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    private ?string $max_permissible_volume = null;
 
     public function __construct()
     {
@@ -117,6 +124,30 @@ class Truck
                 $route->setTruck(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLicensePlate(): ?string
+    {
+        return $this->license_plate;
+    }
+
+    public function setLicensePlate(string $license_plate): static
+    {
+        $this->license_plate = $license_plate;
+
+        return $this;
+    }
+
+    public function getMaxPermissibleVolume(): ?string
+    {
+        return $this->max_permissible_volume;
+    }
+
+    public function setMaxPermissibleVolume(string $max_permissible_volume): static
+    {
+        $this->max_permissible_volume = $max_permissible_volume;
 
         return $this;
     }

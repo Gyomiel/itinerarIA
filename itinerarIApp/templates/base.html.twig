@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %} itinerarIA | Home
+			{% block title %}
+				itinerarIA | Home
 			{% endblock %}
 		</title>
 
@@ -23,62 +24,169 @@
 	<body class="flex flex-col min-h-screen">
 		{% block header %}
 
-				<nav class="bg-[#4DBAA8] border-gray-200">
-					<div class="bg-[#4DBAA8] flex items-center justify-between p-6">
-						<a href="{{ path('home') }}" class="ml-4 flex items-center space-x-3 rtl:space-x-reverse">
-							<img src="{{ asset('imgs/itinerarIA2_2.jpg') }}" class="h-10"/>
+			<nav class="bg-[#4DBAA8] border-gray-200">
+				<div class="bg-[#4DBAA8] flex items-center justify-between p-6">
+					<a href="{{ path('home') }}" class="ml-4 flex items-center space-x-3 rtl:space-x-reverse h-10">
+						<img src="{{ asset('imgs/alterLogoBW.png') }}" id="logo"/>
+					</a>
+
+
+					<div class="mr-6 bg-[#4DBAA8] items-center justify-between hidden w-full md:flex md:w-auto md:order-1 ml-auto" id="navbar-cta">
+						<ul class="bg-[#4DBAA8] flex flex-col justify-center items-center font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+							<li class="bg-[#4DBAA8] flex items-center">
+								<a href="#" class="bg-[#4DBAA8] block px-3 text-white hover:text-black">Login</a>
+							</li>
+						</ul>
+
+						<a class="fancy" href="#">
+							<span class="top-key"></span>
+							<span class="text">Schedule a demo</span>
+							<span class="bottom-key-1"></span>
+							<span class="bottom-key-2"></span>
 						</a>
-						<div class="bg-[#4DBAA8] flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-							<button type="button" class="mr-4 text-white bg-black hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-[30px] text-lg px-4 py-2 text-center" onclick="window.location.href='#'">
-								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25"/>
-								</svg>
-							</button>
-						</div>
-						<div class="mr-6 bg-[#4DBAA8] items-center justify-between hidden w-full md:flex md:w-auto md:order-1 ml-auto" id="navbar-cta">
-							<ul class="bg-[#4DBAA8] flex flex-col justify-center items-center font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-								<li class="bg-[#4DBAA8] flex items-center">
-									<a href="#" class="bg-[#4DBAA8] block pt-2 px-3 text-white hover:text-black">Placeholder</a>
-								</li>
-								<li class="bg-[#4DBAA8] flex items-center">
-									<a href="#" class="bg-[#4DBAA8] block pt-2 px-3 text-white hover:text-black">Placeholder</a>
-								</li>
-								<li class="bg-[#4DBAA8] flex items-center">
-									<a href="#" class="bg-[#4DBAA8] block pt-2 px-3 text-white hover:text-black">Placeholder</a>
-								</li>
-							</ul>
-						</div>
 					</div>
-				</nav>
+				</div>
+			</nav>
+
+
+			<style>
+				/* From Uiverse.io by vinodjangid07 */
+				/* From Uiverse.io by vinodjangid07 */
+				.fancy {
+					background-color: transparent;
+					border: 2px solid #131515;
+					border-radius: 0;
+					box-sizing: border-box;
+					color: #fff;
+					cursor: pointer;
+					display: inline-block;
+					float: right;
+					font-weight: 700;
+					letter-spacing: 0.05em;
+					margin: 0;
+					outline: none;
+					overflow: visible;
+					padding: 1.25em 2em;
+					position: relative;
+					text-align: center;
+					text-decoration: none;
+					text-transform: none;
+					transition: all 0.3s ease-in-out;
+					user-select: none;
+					font-size: 13px;
+				}
+
+				.fancy::before {
+					content: " ";
+					width: 1.5625rem;
+					height: 2px;
+					background: black;
+					top: 50%;
+					left: 1.5em;
+					position: absolute;
+					transform: translateY(-50%);
+					transform-origin: center;
+					transition: background 0.3s linear, width 0.3s linear;
+				}
+
+				.fancy .text {
+					font-size: 1.125em;
+					line-height: 1.33333em;
+					padding-left: 2em;
+					display: block;
+					text-align: left;
+					transition: all 0.3s ease-in-out;
+					text-transform: uppercase;
+					text-decoration: none;
+					color: black;
+				}
+
+				.fancy .top-key {
+					height: 2px;
+					width: 1.5625rem;
+					top: -2px;
+					left: 0.625rem;
+					position: absolute;
+					background: #e8e8e8;
+					transition: width 0.5s ease-out, left 0.3s ease-out;
+				}
+
+				.fancy .bottom-key-1 {
+					height: 2px;
+					width: 1.5625rem;
+					right: 1.875rem;
+					bottom: -2px;
+					position: absolute;
+					background: #e8e8e8;
+					transition: width 0.5s ease-out, right 0.3s ease-out;
+				}
+
+				.fancy .bottom-key-2 {
+					height: 2px;
+					width: 0.625rem;
+					right: 0.625rem;
+					bottom: -2px;
+					position: absolute;
+					background: #e8e8e8;
+					transition: width 0.5s ease-out, right 0.3s ease-out;
+				}
+
+				.fancy:hover {
+					color: white;
+					background: #2B2C28;
+
+				}
+
+				.fancy:hover::before {
+					width: 0.9375rem;
+					background: white;
+				}
+
+				.fancy:hover .text {
+					color: white;
+					padding-left: 1.5em;
+				}
+
+				.fancy:hover .top-key {
+					left: -2px;
+					width: 0;
+				}
+
+				.fancy:hover .bottom-key-1,
+				.fancy:hover .bottom-key-2 {
+					right: 0;
+					width: 0;
+				}
+
+				#logo {
+					height: 55px;
+				}
+			</style>
 
 		{% endblock %}
 
-{% block body %}
+		{% block body %}{% endblock %}
 
 
-{% endblock %}
-		
+		{% block footer %}
+			<footer class="w-full bg-[#1C2541] shadow self-end">
+				<div class="w-full mx-auto max-w-screen-xl p-4 text-center">
+					<span class="text-sm text-slate-100">
+						© 2025
+						<span class="font-bold">itinerar<span class="text-[#7DE2D1]">IA</span>
+						</span>
+						by
+						<a href="https://github.com/zoraidafalcon" class="font-bold hover:underline">Ana Zoraida Falcón</a>,
+						<a href="https://github.com/AngelRodriguez66" class="font-bold hover:underline">Ángel Rodríguez</a>,
+						<a href="https://github.com/LkYharlan" class="font-bold hover:underline">Daniel Moreno</a>,
+						<a href="https://github.com/Jezabel-sh" class="font-bold hover:underline">Jezabel Sánchez</a>,
+						<a href="https://github.com/Gyomiel" class="font-bold hover:underline">Marta de la Rosa</a>.
+																																							All Rights Reserved.
+					</span>
+				</div>
+			</footer>
 
-{% block footer %}
-	<footer class="w-full bg-[#1C2541] shadow self-end">
-		<div class="w-full mx-auto max-w-screen-xl p-4 text-center">
-			<span class="text-sm text-slate-100">
-				© 2025
-				<span class="font-bold">itinerar<span class="text-[#7DE2D1]">IA</span></span>
-				by
-				<a href="https://github.com/zoraidafalcon" class="font-bold hover:underline">Ana Zoraida Falcón</a>,
-				<a href="https://github.com/AngelRodriguez66" class="font-bold hover:underline">Ángel Rodríguez</a>,
-				<a href="https://github.com/LkYharlan" class="font-bold hover:underline">Daniel Moreno</a>,
-				<a href="https://github.com/Jezabel-sh" class="font-bold hover:underline">Jezabel Sánchez</a>,
-				<a href="https://github.com/Gyomiel" class="font-bold hover:underline">Marta de la Rosa</a>.
-				All Rights Reserved.
-			</span>
-		</div>
-	</footer>
-
-{% endblock %}
-
+		{% endblock %}
 
 	</body>
 </html></body></html>
-

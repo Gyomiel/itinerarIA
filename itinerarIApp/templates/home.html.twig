@@ -15,15 +15,19 @@
 {% block body %}
 	<div class="card__wrapper">
 		<div class="card">
-		<span class="card__title">Optimizing routes for a smarter, greener future.</span>
+		<span class="card__title">Optimizing routes for a smarter, <span class="greenTxt">greener</span> future.</span>
 			<p class="card__content"><span class="boldTxt">itinerarIA</span> is a logistics platform that uses an advanced AI model to optimize routes, ensuring trucks are fully loaded and take the shortest, most efficient paths. This leads to faster deliveries, better organization, and reduced fuel consumption, making the process more eco-friendly and cost-effective.</p>
 			<div class="buttonContainer">
-				<button class="card__button">
-					<a href="#" class="centerThis">Admin dashboard</a>
-				</button>
-				<button class="card__button2">
-					<a href="#" class="centerThis">Driver dashboard</a>
-				</button>
+				
+					<a href="{{ path('adminDashboard') }}">
+          <button class="card__button items-center">Admin dashboard</button>
+          </a>
+				
+				
+					<a href="{{ path('driverDashboard') }}">
+          <button class="card__button2 items-center">Driver dashboard</button>
+          </a>
+				
 			</div>
 		</div>
 	</div>
@@ -34,7 +38,12 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: center;  
+  height: 82vh;
+}
+
+.greenTxt {
+color: #16C47F;
 }
 
 .card {
@@ -43,7 +52,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 font-family: 'Raleway', sans-serif;
-  width: 1400px;
+  width: 1200px;
   padding: 20px;
   background: #FFFAFB;
   border: 6px solid #000;
@@ -96,10 +105,6 @@ font-family: 'Raleway', sans-serif;
 	margin-bottom: 20px;
 }
 
-.centerThis {
-	width: 100%;
-}
-
 .card__button {
 font-family: 'Raleway', sans-serif;
   display: flex;
@@ -127,7 +132,7 @@ font-family: 'Raleway', sans-serif;
   left: 0;
   width: 100%;
   height: 105%;
-  background-color: #5ad641;
+  background-color: #5BC0BE;
   color: #000;
   display: flex;
   align-items: center;
@@ -167,7 +172,7 @@ font-family: 'Raleway', sans-serif;
   left: 0;
   width: 100%;
   height: 105%;
-  background-color: #5ad641;
+  background-color: #5BC0BE;
   color: #000;
   display: flex;
   align-items: center;

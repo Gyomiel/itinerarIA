@@ -44,6 +44,9 @@ class Order
     #[ORM\JoinColumn(nullable: false)]
     private ?Route $route = null;
 
+    #[ORM\Column]
+    private ?int $sequence = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -153,6 +156,18 @@ class Order
     public function setRoute(?Route $route): static
     {
         $this->route = $route;
+
+        return $this;
+    }
+
+    public function getSequence(): ?int
+    {
+        return $this->sequence;
+    }
+
+    public function setSequence(int $sequence): static
+    {
+        $this->sequence = $sequence;
 
         return $this;
     }
