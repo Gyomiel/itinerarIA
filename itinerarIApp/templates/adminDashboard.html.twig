@@ -2,79 +2,111 @@
 
 {% block body %}
 
-	<div class="grid grid-cols-2">
-		<div class="w-[650px] h-[300px] rounded-sm p-2 flex flex-col gap-1 m-auto">
-			<div class="flex-1 group flex-col h-full overflow-hidden cursor-pointer border-4 border-[#2B2C28] flex justify-center items-center transition-all duration-500 bg-[#FFFAFB] hover:flex-[8] focus-within:flex-[8]">
+	<head>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+	</head>
 
-
+	<div class="grid grid-cols-2 h-[81.2vh]">
+		<div class="w-[700px] max-h-[600px] rounded-sm p-2 flex flex-col gap-1 m-auto overflow-y-scroll">
+			<div id="toggleDiv" class="flex-1 p-4 group flex-col cursor-pointer border-4 border-[#2B2C28] flex items-center transition-all duration-500 bg-[#FFFAFB] hover:flex-[8] focus-within:flex-[8]" onclick="toggleDiv()">
 				<div class="flex justify-evenly gap-6">
 					<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
 						<strong>Order ID:</strong>
-						23
+						{{order[0].id}}
 					</span>
 					<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
 						<strong>Customer ID:</strong>
-						4
+						{{customer[0].id}}
 					</span>
+
 					<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-						<strong>Assigned route ID:</strong>
-						5
+						<strong>Assigned route:</strong>
+						{{ order[0].route is not null ? order[0].route : 'N/A'}}
 					</span>
+
 				</div>
 
-				<div class="hidden group-hover:flex text-[#2B2C28] transition-opacity uppercase duration-500">
-					<div class="group-hover:flex group-hover:flex-col">
-						<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-							<strong>Name:</strong>
-							Dani Moreno
-						</span>
-
-						<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-							<strong>ID:</strong>
-							12345678X
-						</span>
-
-						<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-							<strong>Email:</strong>
-							La.bicicleta.de.Marta@gmail.com
-						</span>
-					</div>
-                    <div class="group-hover:flex group-hover:flex-col">
-						<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-							<strong>Phone:</strong>
-							7777
-						</span>
-
+				<div id="extraContent" class="hidden group-hover:flex group-hover:flex-col text-[#2B2C28] transition-opacity uppercase duration-500 ease-in-out">
+					<div class="flex">
 						<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
 							<strong>Address:</strong>
-							Calle Los Robles de Casimirio Divino, nº 12
-						</span>
-
-						<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-							<strong>Box Size:</strong>
-							Large
+							{{order[0].deliveryAddress}}
 						</span>
 					</div>
+					<div class="flex w-full justify-around">
+						<div class="flex flex-col items-start">
+							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
+								<strong>Name:</strong>
+								{{customer[0].firstName}}
+								{{customer[0].lastName}}
+							</span>
+							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
+								<strong>Phone:</strong>
+								{{customer[0].phone}}
+							</span>
+						</div>
+						<div class="flex flex-col items-start">
+							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
+								<strong>National ID:</strong>
+								{{customer[0].nationalIdNumber}}
+							</span>
+
+							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
+								<strong>Box Size:</strong>
+								{{order[0].boxType}}
+							</span>
+						</div>
+					</div>
 				</div>
-
 			</div>
-
-
-			<p class="flex-1 h-full overflow-hidden cursor-pointer rounded-sm border border-[#ff5a91] flex justify-center items-center transition-all duration-500 bg-[#212121] hover:flex-[4]">
-				<span class="p-2 text-center text-[#ff568e] uppercase tracking-wider transition-all duration-500">
-					HOVER ME
-				</span>
-			</p>
-			<p class="flex-1 h-full overflow-hidden cursor-pointer rounded-sm border border-[#ff5a91] flex justify-center items-center transition-all duration-500 bg-[#212121] hover:flex-[4]">
-				<span class="p-2 text-center text-[#ff568e] uppercase tracking-wider transition-all duration-500">
-					HOVER ME
-				</span>
-			</p>
 		</div>
 		<div class="m-auto">
-			<p>holajaja</p>
+			<div id="map"></div>
 		</div>
 	</div>
+
+	<style>
+		#map {
+			height: 500px;
+			width: 700px;
+		}
+
+		#extraContent.show {
+			display: block;
+		}
+
+		#extraContent.hide {
+			display: none;
+		}
+	</style>
+
+	<script>
+		var map = L.map('map').setView([
+27.96683841473653, -15.392203774815524
+], 16);
+var marker = L.marker([27.96683841473653, -15.392203774815524]).addTo(map);
+marker.bindPopup("<b>El Goro, Telde</b><br>Warehouse #1").openPopup();
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+maxZoom: 19,
+attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+const toggleDiv = () => {
+let content = document.getElementById('extraContent');
+if (content.classList.contains("hidden")) {
+content.classList.remove("hidden");
+content.classList.add("flex");
+content.classList.add("flex-col");
+
+} else {
+content.classList.remove("flex");
+content.classList.remove("flex-col");
+content.classList.add("hidden");
+}
+}
+	</script>
 
 
 {% endblock %}
