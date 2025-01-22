@@ -22,19 +22,19 @@ class PaginationLinks
             $paginationHtml .= $this->generateLink($currentPage - 1, '◄', $route, $queryParams);
         }
 
-        // Display pages 1-10
-        for ($page = 1; $page <= min(10, $totalPages); ++$page) {
+        // Display pages 1-5
+        for ($page = 1; $page <= min(5, $totalPages); ++$page) {
             $activeClass = ($page === $currentPage) ? 'active' : '';
             $paginationHtml .= $this->generateLink($page, (string) $page, $route, $queryParams, $activeClass);
         }
 
         // If we're past page 10, add an ellipsis
-        if ($totalPages > 10 && $currentPage > 10) {
+        if ($totalPages > 5 && $currentPage > 5) {
             $paginationHtml .= '<span> ... </span>';
         }
 
         // Add the current page and a couple of neighbors if we're past page 10
-        $startPage = max(11, $currentPage);
+        $startPage = max(6, $currentPage);
         $endPage = min($currentPage + 1, $totalPages - 1);  // Stop one before the last page
 
         for ($page = $startPage; $page <= $endPage; ++$page) {
