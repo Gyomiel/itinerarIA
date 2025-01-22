@@ -29,11 +29,13 @@ class HomeController extends AbstractController
     #[Route('/admin_dashboard', name: 'adminDashboard')]
     public function adminRoute(PagePaginator $pagePaginate, PaginationLinks $paginationLinks, EntityManagerInterface $entityManager, Request $request, CustomerRepository $customerRepository, DriverRepository $driverRepository, OrderRepository $orderRepository, RouteRepository $routeRepository, TruckRepository $truckRepository): Response
     {
-        $paginatedPost = $pagePaginate->paginate($entityManager->getRepository(Order::class)->createQueryBuilder('o'), 1, 10);
-        $paginatedPosts = $pagePaginate->paginate($entityManager->getRepository(Order::class)->createQueryBuilder('o'), 1, 10);
+        $page = $request->query->getInt('page', 1);
+
+        $paginatedPosts = $pagePaginate->paginate($entityManager->getRepository(Order::class)->createQueryBuilder('o'), $page, 8);
+
         $pagination = $paginationLinks->generateLinks(
             $paginatedPosts['pages'],
-            $paginatedPost['page'],
+            $paginatedPosts['page'],
             $this->generateUrl('adminDashboard')
         );
 

@@ -19,22 +19,22 @@ class PaginationLinks
 
         // Add "Previous" button
         if ($currentPage > 1) {
-            $paginationHtml .= $this->generateLink($currentPage - 1, 'Previous', $route, $queryParams);
+            $paginationHtml .= $this->generateLink($currentPage - 1, '◄', $route, $queryParams);
         }
 
-        // Display pages 1-4
-        for ($page = 1; $page <= min(4, $totalPages); ++$page) {
+        // Display pages 1-10
+        for ($page = 1; $page <= min(10, $totalPages); ++$page) {
             $activeClass = ($page === $currentPage) ? 'active' : '';
             $paginationHtml .= $this->generateLink($page, (string) $page, $route, $queryParams, $activeClass);
         }
 
-        // If we're past page 4, add an ellipsis
-        if ($totalPages > 4 && $currentPage > 4) {
-            $paginationHtml .= '<span>...</span>';
+        // If we're past page 10, add an ellipsis
+        if ($totalPages > 10 && $currentPage > 10) {
+            $paginationHtml .= '<span> ... </span>';
         }
 
-        // Add the current page and a couple of neighbors if we're past page 4
-        $startPage = max(5, $currentPage);
+        // Add the current page and a couple of neighbors if we're past page 10
+        $startPage = max(11, $currentPage);
         $endPage = min($currentPage + 1, $totalPages - 1);  // Stop one before the last page
 
         for ($page = $startPage; $page <= $endPage; ++$page) {
@@ -44,7 +44,7 @@ class PaginationLinks
 
         // Add ellipsis before the last page, if necessary
         if ($endPage < $totalPages - 1) {
-            $paginationHtml .= '<span>...</span>';
+            $paginationHtml .= '<span> ... </span>';
         }
 
         // Add the last page link
@@ -55,7 +55,7 @@ class PaginationLinks
 
         // Add "Next" button
         if ($currentPage < $totalPages) {
-            $paginationHtml .= $this->generateLink($currentPage + 1, 'Next', $route, $queryParams);
+            $paginationHtml .= $this->generateLink($currentPage + 1, '►', $route, $queryParams);
         }
 
         $paginationHtml .= '</div>';
