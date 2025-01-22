@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
 use App\Repository\CustomerRepository;
 use App\Repository\DriverRepository;
 use App\Repository\OrderRepository;
 use App\Repository\RouteRepository;
 use App\Repository\TruckRepository;
+use App\Service\Pagination\PagePaginator;
+use App\Service\Pagination\PaginationLinks;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,10 +27,20 @@ class HomeController extends AbstractController
     }
 
     #[Route('/admin_dashboard', name: 'adminDashboard')]
-    public function adminRoute(Request $request, CustomerRepository $customerRepository, DriverRepository $driverRepository, OrderRepository $orderRepository, RouteRepository $routeRepository, TruckRepository $truckRepository): Response
+    public function adminRoute(PagePaginator $pagePaginate, PaginationLinks $paginationLinks, EntityManagerInterface $entityManager, Request $request, CustomerRepository $customerRepository, DriverRepository $driverRepository, OrderRepository $orderRepository, RouteRepository $routeRepository, TruckRepository $truckRepository): Response
     {
+        $paginatedPost = $pagePaginate->paginate($entityManager->getRepository(Order::class)->createQueryBuilder('o'), 1, 10);
+        $paginatedPosts = $pagePaginate->paginate($entityManager->getRepository(Order::class)->createQueryBuilder('o'), 1, 10);
+        $pagination = $paginationLinks->generateLinks(
+            $paginatedPosts['pages'],
+            $paginatedPost['page'],
+            $this->generateUrl('adminDashboard')
+        );
+
         return $this->render('adminDashboard.html.twig', [
             'controller_name' => 'HomeController',
+            'posts' => $paginatedPosts['items'],
+            'pagination' => $pagination,
             'customer' => $customerRepository->findAll(),
             'driver' => $driverRepository->findAll(),
             'order' => $orderRepository->findAll(),

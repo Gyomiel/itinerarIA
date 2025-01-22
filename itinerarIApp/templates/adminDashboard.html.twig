@@ -7,170 +7,74 @@
 		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 	</head>
 
-	<div class="grid grid-cols-2 h-[81.2vh]">
-		<div class="w-[800px] max-h-[600px] rounded-sm p-2 flex flex-col gap-1 m-auto overflow-y-scroll">
-			<div id="toggleDiv" class="flex-1 p-4 group flex-col cursor-pointer border-4 border-[#2B2C28] flex items-center transition-all duration-500 bg-[#FFFAFB] hover:flex-[8] focus-within:flex-[8]">
-				<div class="flex justify-evenly gap-6">
-					<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-						<strong>Order ID:</strong>
-						{{order[0].id}}
-					</span>
-					<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-						<strong>Customer ID:</strong>
-						{{customer[0].id}}
-					</span>
+	<div
+		class="grid grid-cols-2 h-[81.2vh]">
+		{{dump(posts)}} 
+{{ pagination | raw }}
+		<div class="w-[800px] max-h-[600px] rounded-sm p-2 flex flex-col justify-center items-center gap-1 m-auto overflow-y-scroll">
 
-					<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-						<strong>Assigned route:</strong>
-						{{ order[0].route is not null ? order[0].route : 'N/A'}}
-					</span>
-
-				</div>
-
-				<div class="extraContent hidden group-hover:flex group-hover:flex-col text-[#2B2C28] transition-opacity uppercase duration-500 ease-in-out">
-					<div class="flex">
-						<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-							<strong>Address:</strong>
-							{{order[0].deliveryAddress}}
+			{% for item in order %}
+				<div id="toggleDiv" class="flex-1 group flex-col cursor-pointer border-4 border-[#2B2C28] flex items-center transition-all duration-500 bg-[#FFFAFB] hover:flex-[8] focus-within:flex-[8] w-full">
+					<div class="flex gap-6">
+						<span class="mx-5 p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
+							<strong>Order ID:</strong>
+							{{item.id}}
 						</span>
-					</div>
-					<div class="flex w-full justify-around">
-						<div class="flex flex-col items-start">
-							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-								<strong>Name:</strong>
-								{{customer[0].firstName}}
-								{{customer[0].lastName}}
-							</span>
-							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-								<strong>Phone:</strong>
-								{{customer[0].phone}}
-							</span>
-						</div>
-						<div class="flex flex-col items-start">
-							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-								<strong>National ID:</strong>
-								{{customer[0].nationalIdNumber}}
-							</span>
-
-							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-								<strong>Box Size:</strong>
-								{{order[0].boxType}}
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="toggleDiv" class="flex-1 p-4 group flex-col cursor-pointer border-4 border-[#2B2C28] flex items-center transition-all duration-500 bg-[#FFFAFB] hover:flex-[8] focus-within:flex-[8]">
-				<div class="flex justify-evenly gap-6">
-					<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-						<strong>Order ID:</strong>
-						{{order[0].id}}
-					</span>
-					<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-						<strong>Customer ID:</strong>
-						{{customer[0].id}}
-					</span>
-
-					<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-						<strong>Assigned route:</strong>
-						{{ order[0].route is not null ? order[0].route : 'N/A'}}
-					</span>
-
-				</div>
-
-				<div class="extraContent hidden group-hover:flex group-hover:flex-col text-[#2B2C28] transition-opacity uppercase duration-500 ease-in-out">
-					<div class="flex">
-						<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-							<strong>Address:</strong>
-							{{order[0].deliveryAddress}}
+						<span class="mx-5 p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
+							<strong>Customer ID:</strong>
+							{{item.customer.id}}
 						</span>
-					</div>
-					<div class="flex w-full justify-around">
-						<div class="flex flex-col items-start">
-							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-								<strong>Name:</strong>
-								{{customer[0].firstName}}
-								{{customer[0].lastName}}
-							</span>
-							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-								<strong>Phone:</strong>
-								{{customer[0].phone}}
-							</span>
-						</div>
-						<div class="flex flex-col items-start">
-							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-								<strong>National ID:</strong>
-								{{customer[0].nationalIdNumber}}
-							</span>
 
-							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-								<strong>Box Size:</strong>
-								{{order[0].boxType}}
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="toggleDiv" class="flex-1 p-4 group flex-col cursor-pointer border-4 border-[#2B2C28] flex items-center transition-all duration-500 bg-[#FFFAFB] hover:flex-[8] focus-within:flex-[8]">
-				<div class="flex justify-evenly gap-6">
-					<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-						<strong>Order ID:</strong>
-						{{order[0].id}}
-					</span>
-					<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-						<strong>Customer ID:</strong>
-						{{customer[0].id}}
-					</span>
-
-					<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-						<strong>Assigned route:</strong>
-						{{ order[0].route is not null ? order[0].route : 'N/A'}}
-					</span>
-
-				</div>
-
-				<div class="extraContent hidden group-hover:flex group-hover:flex-col text-[#2B2C28] transition-opacity uppercase duration-500 ease-in-out">
-					<div class="flex">
-						<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-							<strong>Address:</strong>
-							{{order[0].deliveryAddress}}
+						<span class="mx-5 p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
+							<strong>Assigned route:</strong>
+							{{ item.route is not null ? item.route : 'N/A'}}
 						</span>
+
 					</div>
-					<div class="flex w-full justify-around">
-						<div class="flex flex-col items-start">
+
+					<div class="extraContent hidden group-hover:flex group-hover:flex-col text-[#2B2C28] transition-opacity uppercase duration-500 ease-in-out">
+						<div class="flex">
 							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-								<strong>Name:</strong>
-								{{customer[0].firstName}}
-								{{customer[0].lastName}}
-							</span>
-							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-								<strong>Phone:</strong>
-								{{customer[0].phone}}
+								<strong>Address:</strong>
+								{{item.deliveryAddress}}
 							</span>
 						</div>
-						<div class="flex flex-col items-start">
-							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-								<strong>National ID:</strong>
-								{{customer[0].nationalIdNumber}}
-							</span>
+						<div class="flex w-full justify-around">
+							<div class="flex flex-col items-start">
+								<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
+									<strong>Name:</strong>
+									{{item.customer.firstName}}
+									{{item.customer.lastName}}
+								</span>
+								<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
+									<strong>Phone:</strong>
+									{{item.customer.phone}}
+								</span>
+							</div>
+							<div class="flex flex-col items-start">
+								<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
+									<strong>National ID:</strong>
+									{{item.customer.nationalIdNumber}}
+								</span>
 
-							<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
-								<strong>Box Size:</strong>
-								{{order[0].boxType}}
-							</span>
+								<span class="p-2 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
+									<strong>Box Size:</strong>
+									{{item.boxType}}
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-
+			{% endfor %}
+			
+			
 
 		</div>
+
 		<div class="m-auto">
 			<div id="map"></div>
 
-		<a href="{{ path('home') }}" class="">
+			<a href="{{ path('home') }}" class="">
 				<div class="sp">
 					<button class="sparkle-button">
 						<span class="spark"></span>
@@ -254,7 +158,7 @@
 	<style>
 		#map {
 			height: 500px;
-			width: 700px;
+			width: 780px;
 			border: 4.5px black solid;
 		}
 
