@@ -35,7 +35,7 @@
 
 							<span class="mx-5 text-center text-[#2B2C28] uppercase tracking-wider transition-all duration-500">
 								<strong>Assigned route:</strong>
-								{{ item.route is not null ? item.route : 'N/A'}}
+								{{ item.route is not null ? item.route.id : 'N/A'}}
 							</span>
 
 						</div>
@@ -86,7 +86,7 @@
 			<div id="map"></div>
 
 			<div class="btnWrapper">
-				<a href="{{ path('home') }}">
+				<a href="https://itineraria.onrender.com/optimize">
 					<button class="button">
 						<div class="dots_border"></div>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" class="sparkle">

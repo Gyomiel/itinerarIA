@@ -47,14 +47,22 @@ class HomeController extends AbstractController
             'driver' => $driverRepository->findAll(),
             'order' => $orderRepository->findAll(),
             'route' => $routeRepository->findAll(),
-            'truck' => $truckRepository->findAll()]);
+            'truck' => $truckRepository->findAll(),
+        ]);
     }
 
     #[Route('/driver_dashboard', name: 'driverDashboard')]
-    public function driverRoute(): Response
+    public function driverRoute(EntityManagerInterface $entityManager, Request $request, CustomerRepository $customerRepository, DriverRepository $driverRepository, OrderRepository $orderRepository, RouteRepository $routeRepository, TruckRepository $truckRepository): Response
     {
+        $selectedRoute = $orderRepository->findBy(['route' => '1']);
+
         return $this->render('driverDashboard.html.twig', [
             'controller_name' => 'HomeController',
-        ]);
+            'ordersToDisplay' => $selectedRoute,
+            'customer' => $customerRepository->findAll(),
+            'driver' => $driverRepository->findAll(),
+            'order' => $orderRepository->findAll(),
+            'route' => $routeRepository->findAll(),
+            'truck' => $truckRepository->findAll()]);
     }
 }
