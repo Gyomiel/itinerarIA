@@ -1,0 +1,17 @@
+setup.py
+app/__init__.py
+app/config.py
+app/main.py
+app/api/__init__.py
+app/api/endpoinst.py
+app/models/__init__.py
+app/models/database.py
+app/models/routes_model.py
+app/models/trucks_model.py
+app/services/__init__.py
+app/services/route_optimization_service.py
+app/services/truck_loading_service.py
+logistics_api.egg-info/PKG-INFO
+logistics_api.egg-info/SOURCES.txt
+logistics_api.egg-info/dependency_links.txt
+logistics_api.egg-info/top_level.txt
