@@ -13,6 +13,8 @@
 	<head>
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.css"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.js"></script>
 	</head>
 
 	{# {{dump(ordersToDisplay)}} #}
@@ -176,73 +178,68 @@
 			display: none;
 		}
 
-		.leaflet-marker-icon {
-			background-image: url('https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png');
-		}
+.leaflet-routing-container {
+	display: none;
+}
 	</style>
 
 	<script>
 		const markersOnMap = {{ orderInfo|json_encode(constant('JSON_PRETTY_PRINT'))|raw }};
 
-
-let map = L.map('map').setView([
-28.10062659662663, -15.414011295377293
-], 12);
+let map = L.map('map').setView([28.10062659662663, -15.414011295377293], 12);
 
 let blackIcon = new L.Icon({
-iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
-shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-iconSize: [
-25, 41
-],
-iconAnchor: [
-12, 41
-],
-popupAnchor: [
-1, -34
-],
-shadowSize: [41, 41]
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
 });
 
-let marker = L.marker([
-27.96683841473653, -15.392203774815524
-], {icon: blackIcon}).addTo(map);
-
+let marker = L.marker([27.96683841473653, -15.392203774815524], { icon: blackIcon }).addTo(map);
 marker.bindPopup("<b>El Goro, Telde</b><br>Warehouse #1").openPopup();
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-maxZoom: 19,
-attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-
 
 let firstPopupOpened = false;
 
+let routeWaypoints = [];
+
 for (const [deliveryPoint, data] of Object.entries(markersOnMap)) {
-let {latitude, longitude, id} = data;
-let greenIcon = new L.Icon({
-iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-iconSize: [
-25, 41
-],
-iconAnchor: [
-12, 41
-],
-popupAnchor: [
-1, -34
-],
-shadowSize: [41, 41]
-});
-let marker = L.marker([
-latitude, longitude
-], {icon: greenIcon}).addTo(map);
-marker.bindPopup (`<b>Order ID: ${id}</b><br>Delivery point`);
-if (! firstPopupOpened) {
-marker.openPopup();
-firstPopupOpened = true;
+    let { latitude, longitude, id } = data;
+
+    let greenIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    let marker = L.marker([latitude, longitude], { icon: greenIcon }).addTo(map);
+    marker.bindPopup(`<b>Order ID: ${id}</b><br>Delivery point`);
+
+    if (!firstPopupOpened) {
+        marker.openPopup();
+        firstPopupOpened = true;
+    }
+
+    routeWaypoints.push(L.latLng(latitude, longitude));
 }
+
+if (routeWaypoints.length > 1) {
+    L.Routing.control({
+        waypoints: routeWaypoints,
+        routeWhileDragging: false,
+        createMarker: function() { return null; },
+    }).addTo(map);
 }
+
 	</script>
 
 {% endblock %}
