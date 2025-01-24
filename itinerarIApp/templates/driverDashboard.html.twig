@@ -182,8 +182,11 @@
 	</style>
 
 	<script>
-		let map = L.map('map').setView([
-27.96683841473653, -15.392203774815524
+		const markersOnMap = {{ orderInfo|json_encode(constant('JSON_PRETTY_PRINT'))|raw }};
+
+
+let map = L.map('map').setView([
+28.10062659662663, -15.414011295377293
 ], 12);
 
 let blackIcon = new L.Icon({
@@ -212,7 +215,6 @@ maxZoom: 19,
 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-const markersOnMap = {{ orderInfo|json_encode(constant('JSON_PRETTY_PRINT'))|raw }};
 
 let firstPopupOpened = false;
 
