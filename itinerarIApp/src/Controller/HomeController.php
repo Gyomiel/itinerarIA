@@ -41,11 +41,14 @@ class HomeController extends AbstractController
 
         $orderMarkers = $orderRepository->findAll();
         $orderInfo = array_map(function ($order) {
+            $route = $order->getRoute();
+            $routeId = $route ? $route->getId() : null;
+
             return [
                 'id' => $order->getId(),
                 'latitude' => $order->getLatitude(),
                 'longitude' => $order->getLongitude(),
-                'routeId' => $order->getRoute()->getId(),
+                'routeId' => $routeId,
             ];
         }, $orderMarkers);
 
