@@ -15,8 +15,6 @@
 		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 	</head>
 
-	{{dump(ordersToDisplay)}}
-
 	<div class="grid grid-cols-[1.3fr_2.5fr_3fr] gap-10 h-[80.6vh]">
 		<div class="profile-sidebar-container flex flex-col">
 			<div class="px-3 py-5 flex justify-center items-center gap-4 border-b-4 border-[#BFC5FC] bg-[#F2F3FE]">
@@ -31,7 +29,7 @@
 				</div>
 			</div>
 
-			<div id="default-sidebar" class="h-[642px] bg-[#D8DCFD]" data-variable="{{ordersToDisplay|json_encode()|raw}}">
+			<div id="default-sidebar" class="h-[642px] bg-[#D8DCFD]">
 				<div class="h-full px-3 py-4 ml-2 mr-2">
 					<ul class="space-y-3 font-medium">
 						<li>
@@ -177,10 +175,7 @@
 		}
 	</style>
 
-
-	<script defer>
-
-
+	<script>
 		var map = L.map('map').setView([
 27.96683841473653, -15.392203774815524
 ], 12);
@@ -191,11 +186,6 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 maxZoom: 19,
 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-
-
-let deliveryLocations = document.getElementById("default-sidebar").dataset.variable;
-let test = JSON.parse(deliveryLocations);
-console.log(test)
 	</script>
 
 {% endblock %}
