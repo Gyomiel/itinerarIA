@@ -39,6 +39,16 @@ class HomeController extends AbstractController
             $this->generateUrl('adminDashboard')
         );
 
+        $orderMarkers = $orderRepository->findAll();
+        $orderInfo = array_map(function ($order) {
+            return [
+                'id' => $order->getId(),
+                'latitude' => $order->getLatitude(),
+                'longitude' => $order->getLongitude(),
+                'routeId' => $order->getRoute()->getId(),
+            ];
+        }, $orderMarkers);
+
         return $this->render('adminDashboard.html.twig', [
             'controller_name' => 'HomeController',
             'posts' => $paginatedPosts['items'],
@@ -48,6 +58,7 @@ class HomeController extends AbstractController
             'order' => $orderRepository->findAll(),
             'route' => $routeRepository->findAll(),
             'truck' => $truckRepository->findAll(),
+            'orderInfo' => $orderInfo,
         ]);
     }
 
@@ -55,6 +66,15 @@ class HomeController extends AbstractController
     public function driverRoute(EntityManagerInterface $entityManager, Request $request, CustomerRepository $customerRepository, DriverRepository $driverRepository, OrderRepository $orderRepository, RouteRepository $routeRepository, TruckRepository $truckRepository): Response
     {
         $selectedRoute = $orderRepository->findBy(['route' => '1'], ['sequence' => 'ASC']);
+
+        $orderMarkers = $orderRepository->findBy(['route' => '1'], ['sequence' => 'ASC']);
+        $orderInfo = array_map(function ($order) {
+            return [
+                'id' => $order->getId(),
+                'latitude' => $order->getLatitude(),
+                'longitude' => $order->getLongitude(),
+            ];
+        }, $orderMarkers);
 
         return $this->render('driverDashboard.html.twig', [
             'controller_name' => 'HomeController',
@@ -64,6 +84,7 @@ class HomeController extends AbstractController
             'order' => $orderRepository->findAll(),
             'route' => $routeRepository->findAll(),
             'truck' => $truckRepository->findAll(),
+            'orderInfo' => $orderInfo,
         ]);
     }
 }
