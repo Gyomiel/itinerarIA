@@ -1,5 +1,5 @@
 # Steps to install the project locally
 
-1. * Install Symfony
+### 1. **Install Symfony**
 - Prerequisites for installing Symfony:
 
